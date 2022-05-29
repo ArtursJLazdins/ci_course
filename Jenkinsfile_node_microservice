@@ -11,7 +11,9 @@ pipeline {
         }
         stage('deploy-dev') {
             steps {
-                echo "Depployment on DEV"
+                script{
+                    deploy("DEV")
+                }
             }
         }
         stage('test-dev') {
@@ -21,7 +23,9 @@ pipeline {
         }
         stage('deploy-int') {
             steps {
-                echo "Depployment on INT"
+                script{
+                    deploy("INT")
+                }
             }
         }
         stage('test-int') {
@@ -31,7 +35,9 @@ pipeline {
         }
         stage('deploy-prd') {
             steps {
-                echo "Depployment on PRD"
+                script{
+                    deploy("PRD")
+                }
             }
         }
         stage('test-prd') {
@@ -40,4 +46,8 @@ pipeline {
             }
         }
     }
+}
+
+def deploy(String environment){
+    echo "Deployment on ${environment} environment triggered... "
 }
